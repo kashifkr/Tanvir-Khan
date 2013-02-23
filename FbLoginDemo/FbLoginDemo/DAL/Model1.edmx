@@ -1,0 +1,657 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="friendlocalModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="friendlocalModelStoreContainer">
+          <EntitySet Name="basicinfo" EntityType="friendlocalModel.Store.basicinfo" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="category" EntityType="friendlocalModel.Store.category" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="chatmessage" EntityType="friendlocalModel.Store.chatmessage" store:Type="Tables" store:Schema="dbo" store:Name="chatmessage">
+            <DefiningQuery>SELECT 
+      [chatmessage].[msgid] AS [msgid], 
+      [chatmessage].[uid] AS [uid], 
+      [chatmessage].[frdid] AS [frdid], 
+      [chatmessage].[message] AS [message], 
+      [chatmessage].[msgdate] AS [msgdate]
+      FROM [dbo].[chatmessage] AS [chatmessage]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="comments" EntityType="friendlocalModel.Store.comments" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="forums" EntityType="friendlocalModel.Store.forums" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="joinsubcategory" EntityType="friendlocalModel.Store.joinsubcategory" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="messages" EntityType="friendlocalModel.Store.messages" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="msgattachment" EntityType="friendlocalModel.Store.msgattachment" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="profession" EntityType="friendlocalModel.Store.profession" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="subcategory" EntityType="friendlocalModel.Store.subcategory" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Thread" EntityType="friendlocalModel.Store.Thread" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="userarticles" EntityType="friendlocalModel.Store.userarticles" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="usercomments" EntityType="friendlocalModel.Store.usercomments" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="usercv" EntityType="friendlocalModel.Store.usercv" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="userphoto" EntityType="friendlocalModel.Store.userphoto" store:Type="Tables" Schema="dbo" />
+        </EntityContainer>
+        <EntityType Name="basicinfo">
+          <Key>
+            <PropertyRef Name="uid" />
+          </Key>
+          <Property Name="uid" Type="int" Nullable="false" />
+          <Property Name="fullname" Type="varchar" MaxLength="100" />
+          <Property Name="nickname" Type="varchar" MaxLength="100" />
+          <Property Name="postalcode" Type="varchar" MaxLength="100" />
+          <Property Name="agerange" Type="varchar" MaxLength="100" />
+          <Property Name="profession" Type="varchar" MaxLength="150" />
+          <Property Name="interest" Type="varchar" MaxLength="250" />
+          <Property Name="academicname" Type="varchar" MaxLength="250" />
+          <Property Name="lookingfor" Type="varchar" MaxLength="150" />
+          <Property Name="placeofbirth" Type="varchar" MaxLength="150" />
+          <Property Name="username" Type="varchar" MaxLength="100" />
+          <Property Name="password" Type="varchar" MaxLength="100" />
+          <Property Name="mailid" Type="varchar" MaxLength="100" />
+          <Property Name="status" Type="varchar" MaxLength="4" />
+          <Property Name="sdate" Type="varchar" MaxLength="100" />
+          <Property Name="sex" Type="varchar" MaxLength="50" />
+          <Property Name="images" Type="varchar" MaxLength="500" />
+          <Property Name="aboutus" Type="varchar" MaxLength="500" />
+          <Property Name="countryname" Type="varchar" MaxLength="255" />
+          <Property Name="cityname" Type="varchar" MaxLength="255" />
+          <Property Name="chatstatus" Type="int" />
+          <Property Name="Village" Type="varchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="category">
+          <Key>
+            <PropertyRef Name="catid" />
+          </Key>
+          <Property Name="catid" Type="int" Nullable="false" />
+          <Property Name="uid" Type="int" Nullable="false" />
+          <Property Name="catname" Type="varchar" MaxLength="100" />
+          <Property Name="catdate" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <!--Errors Found During Generation:
+      warning 6002: The table/view 'friendlocal.dbo.chatmessage' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+        <EntityType Name="chatmessage">
+          <Key>
+            <PropertyRef Name="msgid" />
+            <PropertyRef Name="uid" />
+            <PropertyRef Name="frdid" />
+            <PropertyRef Name="message" />
+            <PropertyRef Name="msgdate" />
+          </Key>
+          <Property Name="msgid" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="uid" Type="int" Nullable="false" />
+          <Property Name="frdid" Type="int" Nullable="false" />
+          <Property Name="message" Type="varchar" Nullable="false" MaxLength="4000" />
+          <Property Name="msgdate" Type="varchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="comments">
+          <Key>
+            <PropertyRef Name="commid" />
+          </Key>
+          <Property Name="commid" Type="int" Nullable="false" />
+          <Property Name="commentsname" Type="varchar" MaxLength="400" />
+          <Property Name="commentsdescription" Type="varchar" MaxLength="5000" />
+          <Property Name="threadid" Type="int" Nullable="false" />
+          <Property Name="commentsdate" Type="varchar" MaxLength="100" />
+          <Property Name="userid" Type="int" />
+        </EntityType>
+        <EntityType Name="forums">
+          <Key>
+            <PropertyRef Name="forid" />
+          </Key>
+          <Property Name="forid" Type="int" Nullable="false" />
+          <Property Name="forname" Type="varchar" MaxLength="400" />
+          <Property Name="fordescription" Type="varchar" MaxLength="5000" />
+          <Property Name="catid" Type="int" Nullable="false" />
+          <Property Name="fordate" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="joinsubcategory">
+          <Key>
+            <PropertyRef Name="joinid" />
+          </Key>
+          <Property Name="joinid" Type="int" Nullable="false" />
+          <Property Name="uid" Type="int" Nullable="false" />
+          <Property Name="catid" Type="int" Nullable="false" />
+          <Property Name="subcatid" Type="int" Nullable="false" />
+          <Property Name="joindate" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="messages">
+          <Key>
+            <PropertyRef Name="composeid" />
+          </Key>
+          <Property Name="composeid" Type="int" Nullable="false" />
+          <Property Name="subject" Type="varchar" MaxLength="255" />
+          <Property Name="toid" Type="varchar" MaxLength="255" />
+          <Property Name="ccid" Type="varchar" MaxLength="255" />
+          <Property Name="bccid" Type="varchar" MaxLength="500" />
+          <Property Name="message" Type="varchar" MaxLength="500" />
+          <Property Name="sentstatus" Type="varchar" MaxLength="10" />
+          <Property Name="readstatus" Type="varchar" MaxLength="10" />
+          <Property Name="mloginid" Type="varchar" MaxLength="10" />
+          <Property Name="mfriendid" Type="varchar" MaxLength="10" />
+          <Property Name="mdeletebyuser" Type="varchar" MaxLength="3" />
+          <Property Name="mdeletebyfriend" Type="varchar" MaxLength="3" />
+          <Property Name="mdate" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="msgattachment">
+          <Key>
+            <PropertyRef Name="attchid" />
+          </Key>
+          <Property Name="attchid" Type="int" Nullable="false" />
+          <Property Name="msgid" Type="int" />
+          <Property Name="filename" Type="varchar" MaxLength="200" />
+          <Property Name="status" Type="int" />
+        </EntityType>
+        <EntityType Name="profession">
+          <Key>
+            <PropertyRef Name="profid" />
+          </Key>
+          <Property Name="profid" Type="int" Nullable="false" />
+          <Property Name="uid" Type="int" Nullable="false" />
+          <Property Name="profname" Type="varchar" MaxLength="100" />
+          <Property Name="profdate" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="subcategory">
+          <Key>
+            <PropertyRef Name="subcatid" />
+          </Key>
+          <Property Name="subcatid" Type="int" Nullable="false" />
+          <Property Name="catid" Type="int" Nullable="false" />
+          <Property Name="uid" Type="int" Nullable="false" />
+          <Property Name="subcatname" Type="varchar" MaxLength="500" />
+          <Property Name="subcatdescription" Type="varchar" MaxLength="500" />
+          <Property Name="subcatdate" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Thread">
+          <Key>
+            <PropertyRef Name="threadid" />
+          </Key>
+          <Property Name="threadid" Type="int" Nullable="false" />
+          <Property Name="threadname" Type="varchar" MaxLength="400" />
+          <Property Name="threaddescription" Type="varchar" MaxLength="5000" />
+          <Property Name="forid" Type="int" Nullable="false" />
+          <Property Name="threaddate" Type="varchar" MaxLength="100" />
+          <Property Name="userid" Type="int" />
+        </EntityType>
+        <EntityType Name="userarticles">
+          <Key>
+            <PropertyRef Name="artid" />
+          </Key>
+          <Property Name="artid" Type="int" Nullable="false" />
+          <Property Name="uid" Type="int" Nullable="false" />
+          <Property Name="catid" Type="int" Nullable="false" />
+          <Property Name="subcatid" Type="int" Nullable="false" />
+          <Property Name="artname" Type="varchar" MaxLength="500" />
+          <Property Name="artdescription" Type="varchar" MaxLength="500" />
+          <Property Name="artdate" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="usercomments">
+          <Key>
+            <PropertyRef Name="comid" />
+          </Key>
+          <Property Name="comid" Type="int" Nullable="false" />
+          <Property Name="uid" Type="int" Nullable="false" />
+          <Property Name="artid" Type="int" Nullable="false" />
+          <Property Name="commentsdescription" Type="varchar" MaxLength="500" />
+          <Property Name="comdate" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="usercv">
+          <Key>
+            <PropertyRef Name="cvid" />
+          </Key>
+          <Property Name="cvid" Type="int" Nullable="false" />
+          <Property Name="uid" Type="int" Nullable="false" />
+          <Property Name="cvname" Type="varchar" MaxLength="100" />
+          <Property Name="cvdate" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="userphoto">
+          <Key>
+            <PropertyRef Name="photoid" />
+          </Key>
+          <Property Name="photoid" Type="int" Nullable="false" />
+          <Property Name="uid" Type="int" Nullable="false" />
+          <Property Name="photoname" Type="varchar" MaxLength="200" />
+          <Property Name="photodesc" Type="varchar" MaxLength="200" />
+          <Property Name="photopostcode" Type="varchar" MaxLength="200" />
+          <Property Name="photodate" Type="varchar" MaxLength="100" />
+        </EntityType>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="friendlocalModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="friendlocalEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="basicinfoes" EntityType="friendlocalModel.basicinfo" />
+          <EntitySet Name="categories" EntityType="friendlocalModel.category" />
+          <EntitySet Name="chatmessages" EntityType="friendlocalModel.chatmessage" />
+          <EntitySet Name="comments" EntityType="friendlocalModel.comment" />
+          <EntitySet Name="forums" EntityType="friendlocalModel.forum" />
+          <EntitySet Name="joinsubcategories" EntityType="friendlocalModel.joinsubcategory" />
+          <EntitySet Name="messages" EntityType="friendlocalModel.message" />
+          <EntitySet Name="msgattachments" EntityType="friendlocalModel.msgattachment" />
+          <EntitySet Name="professions" EntityType="friendlocalModel.profession" />
+          <EntitySet Name="subcategories" EntityType="friendlocalModel.subcategory" />
+          <EntitySet Name="Threads" EntityType="friendlocalModel.Thread" />
+          <EntitySet Name="userarticles" EntityType="friendlocalModel.userarticle" />
+          <EntitySet Name="usercomments" EntityType="friendlocalModel.usercomment" />
+          <EntitySet Name="usercvs" EntityType="friendlocalModel.usercv" />
+          <EntitySet Name="userphotoes" EntityType="friendlocalModel.userphoto" />
+        </EntityContainer>
+        <EntityType Name="basicinfo">
+          <Key>
+            <PropertyRef Name="uid" />
+          </Key>
+          <Property Name="uid" Type="Int32" Nullable="false" />
+          <Property Name="fullname" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="nickname" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="postalcode" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="agerange" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="profession" Type="String" MaxLength="150" Unicode="false" FixedLength="false" />
+          <Property Name="interest" Type="String" MaxLength="250" Unicode="false" FixedLength="false" />
+          <Property Name="academicname" Type="String" MaxLength="250" Unicode="false" FixedLength="false" />
+          <Property Name="lookingfor" Type="String" MaxLength="150" Unicode="false" FixedLength="false" />
+          <Property Name="placeofbirth" Type="String" MaxLength="150" Unicode="false" FixedLength="false" />
+          <Property Name="username" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="password" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="mailid" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="status" Type="String" MaxLength="4" Unicode="false" FixedLength="false" />
+          <Property Name="sdate" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="sex" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="images" Type="String" MaxLength="500" Unicode="false" FixedLength="false" />
+          <Property Name="aboutus" Type="String" MaxLength="500" Unicode="false" FixedLength="false" />
+          <Property Name="countryname" Type="String" MaxLength="255" Unicode="false" FixedLength="false" />
+          <Property Name="cityname" Type="String" MaxLength="255" Unicode="false" FixedLength="false" />
+          <Property Name="chatstatus" Type="Int32" />
+          <Property Name="Village" Type="String" MaxLength="250" Unicode="false" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="category">
+          <Key>
+            <PropertyRef Name="catid" />
+          </Key>
+          <Property Name="catid" Type="Int32" Nullable="false" />
+          <Property Name="uid" Type="Int32" Nullable="false" />
+          <Property Name="catname" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="catdate" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="chatmessage">
+          <Key>
+            <PropertyRef Name="msgid" />
+            <PropertyRef Name="uid" />
+            <PropertyRef Name="frdid" />
+            <PropertyRef Name="message" />
+            <PropertyRef Name="msgdate" />
+          </Key>
+          <Property Name="msgid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="uid" Type="Int32" Nullable="false" />
+          <Property Name="frdid" Type="Int32" Nullable="false" />
+          <Property Name="message" Type="String" Nullable="false" MaxLength="4000" Unicode="false" FixedLength="false" />
+          <Property Name="msgdate" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="comment">
+          <Key>
+            <PropertyRef Name="commid" />
+          </Key>
+          <Property Name="commid" Type="Int32" Nullable="false" />
+          <Property Name="commentsname" Type="String" MaxLength="400" Unicode="false" FixedLength="false" />
+          <Property Name="commentsdescription" Type="String" MaxLength="5000" Unicode="false" FixedLength="false" />
+          <Property Name="threadid" Type="Int32" Nullable="false" />
+          <Property Name="commentsdate" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="userid" Type="Int32" />
+        </EntityType>
+        <EntityType Name="forum">
+          <Key>
+            <PropertyRef Name="forid" />
+          </Key>
+          <Property Name="forid" Type="Int32" Nullable="false" />
+          <Property Name="forname" Type="String" MaxLength="400" Unicode="false" FixedLength="false" />
+          <Property Name="fordescription" Type="String" MaxLength="5000" Unicode="false" FixedLength="false" />
+          <Property Name="catid" Type="Int32" Nullable="false" />
+          <Property Name="fordate" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="joinsubcategory">
+          <Key>
+            <PropertyRef Name="joinid" />
+          </Key>
+          <Property Name="joinid" Type="Int32" Nullable="false" />
+          <Property Name="uid" Type="Int32" Nullable="false" />
+          <Property Name="catid" Type="Int32" Nullable="false" />
+          <Property Name="subcatid" Type="Int32" Nullable="false" />
+          <Property Name="joindate" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="message">
+          <Key>
+            <PropertyRef Name="composeid" />
+          </Key>
+          <Property Name="composeid" Type="Int32" Nullable="false" />
+          <Property Name="subject" Type="String" MaxLength="255" Unicode="false" FixedLength="false" />
+          <Property Name="toid" Type="String" MaxLength="255" Unicode="false" FixedLength="false" />
+          <Property Name="ccid" Type="String" MaxLength="255" Unicode="false" FixedLength="false" />
+          <Property Name="bccid" Type="String" MaxLength="500" Unicode="false" FixedLength="false" />
+          <Property Name="message1" Type="String" MaxLength="500" Unicode="false" FixedLength="false" />
+          <Property Name="sentstatus" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+          <Property Name="readstatus" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+          <Property Name="mloginid" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+          <Property Name="mfriendid" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+          <Property Name="mdeletebyuser" Type="String" MaxLength="3" Unicode="false" FixedLength="false" />
+          <Property Name="mdeletebyfriend" Type="String" MaxLength="3" Unicode="false" FixedLength="false" />
+          <Property Name="mdate" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="msgattachment">
+          <Key>
+            <PropertyRef Name="attchid" />
+          </Key>
+          <Property Name="attchid" Type="Int32" Nullable="false" />
+          <Property Name="msgid" Type="Int32" />
+          <Property Name="filename" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
+          <Property Name="status" Type="Int32" />
+        </EntityType>
+        <EntityType Name="profession">
+          <Key>
+            <PropertyRef Name="profid" />
+          </Key>
+          <Property Name="profid" Type="Int32" Nullable="false" />
+          <Property Name="uid" Type="Int32" Nullable="false" />
+          <Property Name="profname" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="profdate" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="subcategory">
+          <Key>
+            <PropertyRef Name="subcatid" />
+          </Key>
+          <Property Name="subcatid" Type="Int32" Nullable="false" />
+          <Property Name="catid" Type="Int32" Nullable="false" />
+          <Property Name="uid" Type="Int32" Nullable="false" />
+          <Property Name="subcatname" Type="String" MaxLength="500" Unicode="false" FixedLength="false" />
+          <Property Name="subcatdescription" Type="String" MaxLength="500" Unicode="false" FixedLength="false" />
+          <Property Name="subcatdate" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Thread">
+          <Key>
+            <PropertyRef Name="threadid" />
+          </Key>
+          <Property Name="threadid" Type="Int32" Nullable="false" />
+          <Property Name="threadname" Type="String" MaxLength="400" Unicode="false" FixedLength="false" />
+          <Property Name="threaddescription" Type="String" MaxLength="5000" Unicode="false" FixedLength="false" />
+          <Property Name="forid" Type="Int32" Nullable="false" />
+          <Property Name="threaddate" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="userid" Type="Int32" />
+        </EntityType>
+        <EntityType Name="userarticle">
+          <Key>
+            <PropertyRef Name="artid" />
+          </Key>
+          <Property Name="artid" Type="Int32" Nullable="false" />
+          <Property Name="uid" Type="Int32" Nullable="false" />
+          <Property Name="catid" Type="Int32" Nullable="false" />
+          <Property Name="subcatid" Type="Int32" Nullable="false" />
+          <Property Name="artname" Type="String" MaxLength="500" Unicode="false" FixedLength="false" />
+          <Property Name="artdescription" Type="String" MaxLength="500" Unicode="false" FixedLength="false" />
+          <Property Name="artdate" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="usercomment">
+          <Key>
+            <PropertyRef Name="comid" />
+          </Key>
+          <Property Name="comid" Type="Int32" Nullable="false" />
+          <Property Name="uid" Type="Int32" Nullable="false" />
+          <Property Name="artid" Type="Int32" Nullable="false" />
+          <Property Name="commentsdescription" Type="String" MaxLength="500" Unicode="false" FixedLength="false" />
+          <Property Name="comdate" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="usercv">
+          <Key>
+            <PropertyRef Name="cvid" />
+          </Key>
+          <Property Name="cvid" Type="Int32" Nullable="false" />
+          <Property Name="uid" Type="Int32" Nullable="false" />
+          <Property Name="cvname" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="cvdate" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="userphoto">
+          <Key>
+            <PropertyRef Name="photoid" />
+          </Key>
+          <Property Name="photoid" Type="Int32" Nullable="false" />
+          <Property Name="uid" Type="Int32" Nullable="false" />
+          <Property Name="photoname" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
+          <Property Name="photodesc" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
+          <Property Name="photopostcode" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
+          <Property Name="photodate" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="friendlocalModelStoreContainer" CdmEntityContainer="friendlocalEntities">
+          <EntitySetMapping Name="basicinfoes">
+            <EntityTypeMapping TypeName="friendlocalModel.basicinfo">
+              <MappingFragment StoreEntitySet="basicinfo">
+                <ScalarProperty Name="uid" ColumnName="uid" />
+                <ScalarProperty Name="fullname" ColumnName="fullname" />
+                <ScalarProperty Name="nickname" ColumnName="nickname" />
+                <ScalarProperty Name="postalcode" ColumnName="postalcode" />
+                <ScalarProperty Name="agerange" ColumnName="agerange" />
+                <ScalarProperty Name="profession" ColumnName="profession" />
+                <ScalarProperty Name="interest" ColumnName="interest" />
+                <ScalarProperty Name="academicname" ColumnName="academicname" />
+                <ScalarProperty Name="lookingfor" ColumnName="lookingfor" />
+                <ScalarProperty Name="placeofbirth" ColumnName="placeofbirth" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="mailid" ColumnName="mailid" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="sdate" ColumnName="sdate" />
+                <ScalarProperty Name="sex" ColumnName="sex" />
+                <ScalarProperty Name="images" ColumnName="images" />
+                <ScalarProperty Name="aboutus" ColumnName="aboutus" />
+                <ScalarProperty Name="countryname" ColumnName="countryname" />
+                <ScalarProperty Name="cityname" ColumnName="cityname" />
+                <ScalarProperty Name="chatstatus" ColumnName="chatstatus" />
+                <ScalarProperty Name="Village" ColumnName="Village" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="categories">
+            <EntityTypeMapping TypeName="friendlocalModel.category">
+              <MappingFragment StoreEntitySet="category">
+                <ScalarProperty Name="catid" ColumnName="catid" />
+                <ScalarProperty Name="uid" ColumnName="uid" />
+                <ScalarProperty Name="catname" ColumnName="catname" />
+                <ScalarProperty Name="catdate" ColumnName="catdate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="chatmessages">
+            <EntityTypeMapping TypeName="friendlocalModel.chatmessage">
+              <MappingFragment StoreEntitySet="chatmessage">
+                <ScalarProperty Name="msgid" ColumnName="msgid" />
+                <ScalarProperty Name="uid" ColumnName="uid" />
+                <ScalarProperty Name="frdid" ColumnName="frdid" />
+                <ScalarProperty Name="message" ColumnName="message" />
+                <ScalarProperty Name="msgdate" ColumnName="msgdate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="comments">
+            <EntityTypeMapping TypeName="friendlocalModel.comment">
+              <MappingFragment StoreEntitySet="comments">
+                <ScalarProperty Name="commid" ColumnName="commid" />
+                <ScalarProperty Name="commentsname" ColumnName="commentsname" />
+                <ScalarProperty Name="commentsdescription" ColumnName="commentsdescription" />
+                <ScalarProperty Name="threadid" ColumnName="threadid" />
+                <ScalarProperty Name="commentsdate" ColumnName="commentsdate" />
+                <ScalarProperty Name="userid" ColumnName="userid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="forums">
+            <EntityTypeMapping TypeName="friendlocalModel.forum">
+              <MappingFragment StoreEntitySet="forums">
+                <ScalarProperty Name="forid" ColumnName="forid" />
+                <ScalarProperty Name="forname" ColumnName="forname" />
+                <ScalarProperty Name="fordescription" ColumnName="fordescription" />
+                <ScalarProperty Name="catid" ColumnName="catid" />
+                <ScalarProperty Name="fordate" ColumnName="fordate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="joinsubcategories">
+            <EntityTypeMapping TypeName="friendlocalModel.joinsubcategory">
+              <MappingFragment StoreEntitySet="joinsubcategory">
+                <ScalarProperty Name="joinid" ColumnName="joinid" />
+                <ScalarProperty Name="uid" ColumnName="uid" />
+                <ScalarProperty Name="catid" ColumnName="catid" />
+                <ScalarProperty Name="subcatid" ColumnName="subcatid" />
+                <ScalarProperty Name="joindate" ColumnName="joindate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="messages">
+            <EntityTypeMapping TypeName="friendlocalModel.message">
+              <MappingFragment StoreEntitySet="messages">
+                <ScalarProperty Name="composeid" ColumnName="composeid" />
+                <ScalarProperty Name="subject" ColumnName="subject" />
+                <ScalarProperty Name="toid" ColumnName="toid" />
+                <ScalarProperty Name="ccid" ColumnName="ccid" />
+                <ScalarProperty Name="bccid" ColumnName="bccid" />
+                <ScalarProperty Name="message1" ColumnName="message" />
+                <ScalarProperty Name="sentstatus" ColumnName="sentstatus" />
+                <ScalarProperty Name="readstatus" ColumnName="readstatus" />
+                <ScalarProperty Name="mloginid" ColumnName="mloginid" />
+                <ScalarProperty Name="mfriendid" ColumnName="mfriendid" />
+                <ScalarProperty Name="mdeletebyuser" ColumnName="mdeletebyuser" />
+                <ScalarProperty Name="mdeletebyfriend" ColumnName="mdeletebyfriend" />
+                <ScalarProperty Name="mdate" ColumnName="mdate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="msgattachments">
+            <EntityTypeMapping TypeName="friendlocalModel.msgattachment">
+              <MappingFragment StoreEntitySet="msgattachment">
+                <ScalarProperty Name="attchid" ColumnName="attchid" />
+                <ScalarProperty Name="msgid" ColumnName="msgid" />
+                <ScalarProperty Name="filename" ColumnName="filename" />
+                <ScalarProperty Name="status" ColumnName="status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="professions">
+            <EntityTypeMapping TypeName="friendlocalModel.profession">
+              <MappingFragment StoreEntitySet="profession">
+                <ScalarProperty Name="profid" ColumnName="profid" />
+                <ScalarProperty Name="uid" ColumnName="uid" />
+                <ScalarProperty Name="profname" ColumnName="profname" />
+                <ScalarProperty Name="profdate" ColumnName="profdate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="subcategories">
+            <EntityTypeMapping TypeName="friendlocalModel.subcategory">
+              <MappingFragment StoreEntitySet="subcategory">
+                <ScalarProperty Name="subcatid" ColumnName="subcatid" />
+                <ScalarProperty Name="catid" ColumnName="catid" />
+                <ScalarProperty Name="uid" ColumnName="uid" />
+                <ScalarProperty Name="subcatname" ColumnName="subcatname" />
+                <ScalarProperty Name="subcatdescription" ColumnName="subcatdescription" />
+                <ScalarProperty Name="subcatdate" ColumnName="subcatdate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Threads">
+            <EntityTypeMapping TypeName="friendlocalModel.Thread">
+              <MappingFragment StoreEntitySet="Thread">
+                <ScalarProperty Name="threadid" ColumnName="threadid" />
+                <ScalarProperty Name="threadname" ColumnName="threadname" />
+                <ScalarProperty Name="threaddescription" ColumnName="threaddescription" />
+                <ScalarProperty Name="forid" ColumnName="forid" />
+                <ScalarProperty Name="threaddate" ColumnName="threaddate" />
+                <ScalarProperty Name="userid" ColumnName="userid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="userarticles">
+            <EntityTypeMapping TypeName="friendlocalModel.userarticle">
+              <MappingFragment StoreEntitySet="userarticles">
+                <ScalarProperty Name="artid" ColumnName="artid" />
+                <ScalarProperty Name="uid" ColumnName="uid" />
+                <ScalarProperty Name="catid" ColumnName="catid" />
+                <ScalarProperty Name="subcatid" ColumnName="subcatid" />
+                <ScalarProperty Name="artname" ColumnName="artname" />
+                <ScalarProperty Name="artdescription" ColumnName="artdescription" />
+                <ScalarProperty Name="artdate" ColumnName="artdate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="usercomments">
+            <EntityTypeMapping TypeName="friendlocalModel.usercomment">
+              <MappingFragment StoreEntitySet="usercomments">
+                <ScalarProperty Name="comid" ColumnName="comid" />
+                <ScalarProperty Name="uid" ColumnName="uid" />
+                <ScalarProperty Name="artid" ColumnName="artid" />
+                <ScalarProperty Name="commentsdescription" ColumnName="commentsdescription" />
+                <ScalarProperty Name="comdate" ColumnName="comdate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="usercvs">
+            <EntityTypeMapping TypeName="friendlocalModel.usercv">
+              <MappingFragment StoreEntitySet="usercv">
+                <ScalarProperty Name="cvid" ColumnName="cvid" />
+                <ScalarProperty Name="uid" ColumnName="uid" />
+                <ScalarProperty Name="cvname" ColumnName="cvname" />
+                <ScalarProperty Name="cvdate" ColumnName="cvdate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="userphotoes">
+            <EntityTypeMapping TypeName="friendlocalModel.userphoto">
+              <MappingFragment StoreEntitySet="userphoto">
+                <ScalarProperty Name="photoid" ColumnName="photoid" />
+                <ScalarProperty Name="uid" ColumnName="uid" />
+                <ScalarProperty Name="photoname" ColumnName="photoname" />
+                <ScalarProperty Name="photodesc" ColumnName="photodesc" />
+                <ScalarProperty Name="photopostcode" ColumnName="photopostcode" />
+                <ScalarProperty Name="photodate" ColumnName="photodate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="Model1">
+        <EntityTypeShape EntityType="friendlocalModel.basicinfo" Width="1.5" PointX="0.75" PointY="0.75" Height="5.2494108072916656" IsExpanded="true" />
+        <EntityTypeShape EntityType="friendlocalModel.category" Width="1.5" PointX="2.75" PointY="0.75" Height="1.7879850260416674" IsExpanded="true" />
+        <EntityTypeShape EntityType="friendlocalModel.chatmessage" Width="1.5" PointX="2.75" PointY="3.75" Height="1.9802864583333322" IsExpanded="true" />
+        <EntityTypeShape EntityType="friendlocalModel.comment" Width="1.5" PointX="4.75" PointY="0.75" Height="2.1725878906249996" IsExpanded="true" />
+        <EntityTypeShape EntityType="friendlocalModel.forum" Width="1.5" PointX="4.75" PointY="3.75" Height="1.9802864583333317" IsExpanded="true" />
+        <EntityTypeShape EntityType="friendlocalModel.joinsubcategory" Width="1.5" PointX="6.75" PointY="0.75" Height="1.9802864583333326" IsExpanded="true" />
+        <EntityTypeShape EntityType="friendlocalModel.message" Width="1.5" PointX="0.75" PointY="6.75" Height="3.5186979166666674" IsExpanded="true" />
+        <EntityTypeShape EntityType="friendlocalModel.msgattachment" Width="1.5" PointX="2.75" PointY="6.75" Height="1.7879850260416674" IsExpanded="true" />
+        <EntityTypeShape EntityType="friendlocalModel.profession" Width="1.5" PointX="6.75" PointY="3.75" Height="1.7879850260416674" IsExpanded="true" />
+        <EntityTypeShape EntityType="friendlocalModel.subcategory" Width="1.5" PointX="4.75" PointY="6.75" Height="2.1725878906249996" IsExpanded="true" />
+        <EntityTypeShape EntityType="friendlocalModel.Thread" Width="1.5" PointX="6.75" PointY="6.75" Height="2.1725878906250031" IsExpanded="true" />
+        <EntityTypeShape EntityType="friendlocalModel.userarticle" Width="1.5" PointX="8.75" PointY="0.75" Height="2.3648893229166674" IsExpanded="true" />
+        <EntityTypeShape EntityType="friendlocalModel.usercomment" Width="1.5" PointX="8.75" PointY="4.75" Height="1.9802864583333388" IsExpanded="true" />
+        <EntityTypeShape EntityType="friendlocalModel.usercv" Width="1.5" PointX="8.75" PointY="7.75" Height="1.7879850260416674" IsExpanded="true" />
+        <EntityTypeShape EntityType="friendlocalModel.userphoto" Width="1.5" PointX="2.75" PointY="9.75" Height="2.1725878906250031" IsExpanded="true" />
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>
